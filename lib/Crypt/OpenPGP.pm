@@ -608,7 +608,7 @@ sub decrypt {
         return $pgp->error("Can't find a secret key to decrypt message")
             unless $kb || $cert;
         if ($kb) {
-            $cert = $kb->encrypting_key;
+            $cert = $kb->key_by_id($sym_key->key_id);
             $cert->uid($kb->primary_uid);
         }
         if ($cert->is_protected) {
